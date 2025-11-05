@@ -10,7 +10,7 @@ const About = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-6">
+        <h2 className="text-2xl sm:text-3xl font-bold text-orange-600 mb-4 sm:mb-6">
           About Me
         </h2>
         <div className="text-base sm:text-lg text-white/80 space-y-3 sm:space-y-4">

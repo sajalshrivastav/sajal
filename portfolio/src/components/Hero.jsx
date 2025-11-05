@@ -75,7 +75,7 @@ const Hero = () => {
                 >
                   <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
                     SOFTWARE ENGINEER
-                    <span className="block text-gray-700/80">FRONTEND</span>
+                    <span className="block text-orange-600">FRONTEND</span>
                   </h1>
 
                   <p className="mt-6 text-gray-300 max-w-2xl text-lg">

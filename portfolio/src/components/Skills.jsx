@@ -42,7 +42,7 @@ const Skills = () => {
         transition={{ duration: 0.5 }}
         className="space-y-8"
       >
-        <h2 className="text-3xl font-bold text-white mb-6">Skills</h2>
+        <h2 className="text-3xl font-bold text-orange-500 mb-6">Skills</h2>
 
         {Object.entries(skillCategories).map(([category, skills]) => (
           <div key={category} className="space-y-3">

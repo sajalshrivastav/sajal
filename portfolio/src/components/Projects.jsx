@@ -38,7 +38,7 @@ const Projects = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-3xl font-bold text-white mb-6">
+        <h2 className="text-3xl font-bold text-orange-600 mb-6">
           Featured Projects
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">

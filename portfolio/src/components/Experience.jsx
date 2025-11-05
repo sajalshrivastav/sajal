@@ -10,7 +10,7 @@ const Experience = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-3xl font-bold text-white mb-6">Work Experience</h2>
+        <h2 className="text-3xl font-bold text-orange-600 mb-6">Work Experience</h2>
         <div className="space-y-6">
 
           {/* Software Engineer */}
