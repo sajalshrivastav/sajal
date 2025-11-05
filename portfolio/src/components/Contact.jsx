@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import { CheckCircle, AlertCircle, Send } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -7,9 +9,13 @@ const Contact = () => {
     email: '',
     company: '',
     phone: '',
-    product: '',
     message: '',
-    source: '',
+  })
+
+  const [submitStatus, setSubmitStatus] = useState({
+    isSubmitting: false,
+    isSubmitted: false,
+    error: null
   })
 
   const handleChange = (e) => {
@@ -20,10 +26,80 @@ const Contact = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log(formData)
+    setSubmitStatus({ isSubmitting: true, isSubmitted: false, error: null })
+
+    try {
+      // Using Web3Forms - free service, no signup required
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: 'YOUR_ACCESS_KEY', // We'll get this for free
+          name: formData.fullName,
+          email: formData.email,
+          company: formData.company || 'Not provided',
+          phone: formData.phone || 'Not provided',
+          message: formData.message,
+          subject: `Portfolio Contact from ${formData.fullName}`,
+          from_name: formData.fullName,
+          replyto: formData.email,
+        }),
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        // Show success message
+        setSubmitStatus({ isSubmitting: false, isSubmitted: true, error: null })
+        
+        // Reset form after success
+        setTimeout(() => {
+          setFormData({
+            fullName: '',
+            email: '',
+            company: '',
+            phone: '',
+            message: '',
+          })
+          setSubmitStatus({ isSubmitting: false, isSubmitted: false, error: null })
+        }, 4000)
+      } else {
+        throw new Error('Failed to send message')
+      }
+
+    } catch (error) {
+      console.error('Form submission error:', error)
+      
+      // Fallback to mailto
+      const subject = `Portfolio Contact: Message from ${formData.fullName}`
+      const body = `Hi Sajal,
+
+I'm reaching out through your portfolio website.
+
+Name: ${formData.fullName}
+Email: ${formData.email}
+Company: ${formData.company || 'Not provided'}
+Phone: ${formData.phone || 'Not provided'}
+
+Message:
+${formData.message}
+
+Best regards,
+${formData.fullName}`
+
+      const mailtoLink = `mailto:ss.official2018@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      window.open(mailtoLink, '_blank')
+
+      setSubmitStatus({ 
+        isSubmitting: false, 
+        isSubmitted: false, 
+        error: 'Email service temporarily unavailable. Email client opened as backup.' 
+      })
+    }
   }
 
   return (
@@ -54,8 +130,8 @@ const Contact = () => {
                 </label>
                 <input
                   type="text"
-                  id="firstName"
-                  name="firstName"
+                  id="fullName"
+                  name="fullName"
                   value={formData.fullName}
                   onChange={handleChange}
                   className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -152,13 +228,65 @@ const Contact = () => {
               />
             </div> */}
 
-            <div>
+            {/* Success Message */}
+            {submitStatus.isSubmitted && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 p-4 bg-green-500/20 border border-green-500/30 rounded-lg text-green-400"
+              >
+                <CheckCircle className="w-5 h-5" />
+                <span>Email client opened! Please send the pre-filled message to complete your inquiry.</span>
+              </motion.div>
+            )}
+
+            {/* Error Message */}
+            {submitStatus.error && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 p-4 bg-red-500/20 border border-red-500/30 rounded-lg text-red-400"
+              >
+                <AlertCircle className="w-5 h-5" />
+                <span>{submitStatus.error}</span>
+              </motion.div>
+            )}
+
+            <div className="flex flex-row items-center gap-4 flex-wrap">
               <button
                 type="submit"
-                className="w-full md:w-auto px-8 py-3 bg-zinc-900 hover:bg-white text-orange-400 font-medium rounded-lg transition-colors"
+                disabled={submitStatus.isSubmitting || submitStatus.isSubmitted}
+                className="flex items-center justify-center gap-2 px-8 py-3 bg-orange-500 hover:bg-orange-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
               >
-                Submit
+                {submitStatus.isSubmitting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    Sending...
+                  </>
+                ) : submitStatus.isSubmitted ? (
+                  <>
+                    <CheckCircle className="w-4 h-4" />
+                    Sent!
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    Send Message
+                  </>
+                )}
               </button>
+
+              {/* Direct contact info */}
+              <div className="flex items-center gap-2 text-sm text-gray-400">
+                <span>or email directly:</span>
+                <a 
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=ss.official2018@gmail.com" 
+                  target='_blank'
+                  className="text-orange-400 relative top-[12px] hover:text-orange-300 transition-colors"
+                >
+                  ss.official2018@gmail.com
+                </a>
+              </div>
             </div>
           </form>
         </div>

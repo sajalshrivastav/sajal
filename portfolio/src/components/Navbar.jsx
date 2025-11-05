@@ -22,7 +22,7 @@ const Navbar = () => {
     { id: 3, name: 'Skills', target: 'skills' },
     { id: 4, name: 'Experience', target: 'experience' },
     { id: 5, name: 'Projects', target: 'projects' },
-    { id: 6, name: 'Contact', target: 'contact' },
+    // { id: 6, name: 'Contact', target: 'contact' },
   ]
 
   return (

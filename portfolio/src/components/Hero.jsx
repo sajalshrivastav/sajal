@@ -113,7 +113,7 @@ const Hero = () => {
               <Skills />
               <Experience />
               <Projects />
-              <Contact />
+              {/* <Contact /> */}
             </div>
           </div>
         </div>
