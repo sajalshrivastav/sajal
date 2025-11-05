@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import {
+  Download,
   Github,
   Instagram,
   Linkedin,
@@ -10,6 +11,18 @@ import {
 import TooltipBubble from './TooltipBubble'
 
 const FixedInfo = () => {
+  // Resume download function
+  const handleResumeDownload = () => {
+    // Option 1: Direct link to resume file in public folder
+    const resumeUrl = '/resume.pdf'
+    const link = document.createElement('a')
+    link.href = resumeUrl
+    link.download = 'Sajal_Shrivastav_Resume.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   const socialLinks = [
     {
       id: 1,
@@ -34,6 +47,12 @@ const FixedInfo = () => {
       name: 'Mail',
       href: 'https://mail.google.com/mail/?view=cm&fs=1&to=ss.official2018@gmail.com',
       Icon: Mail,
+    },
+    {
+      id: 5,
+      name: 'Phone',
+      href: 'tel:+919068799683',
+      Icon: PhoneCall,
     },
   ]
   return (
@@ -63,12 +82,23 @@ const FixedInfo = () => {
 
         <div className="flex justify-between gap-4 mt-6">
           <div className="relative group">
-            <a
-              href="tel:+919068799683"
-              className="bg-zinc-800 inline-flex items-center justify-center w-9 h-9 rounded-full text-white hover:bg-zinc-700 transition-colors"
+            <button
+              onClick={handleResumeDownload}
+              className="bg-zinc-800 inline-flex items-center justify-center w-9 h-9 rounded-full text-white hover:bg-zinc-700 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
             >
-              <PhoneCall size={18} className="text-orange-500" />
-            </a>
+              <Download size={18} className="text-orange-500" />
+            </button>
+            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">
+              <TooltipBubble
+                text="Resume"
+                position="left"
+                bgColor="#222"
+                textColor="#fff"
+                arrowColor="#222"
+                borderRadius="12px"
+                fontSize="12px"
+              />
+            </div>
           </div>
           <div className="flex justify-end items-center gap-3">
             {socialLinks.map(({ id, name, href, Icon }) => (
