@@ -32,7 +32,7 @@ function App() {
         onGradientChange={handleGradientChange}
         currentGradient={currentGradient}
       /> */}
-      <div className="fixed top-0 left-0 right-0 z-50">
+      <div className="fixed top-0 left-[45%] right-0 z-50">
         <Navbar />
       </div>
       <main className="flex-1 relative pt-16 overflow-x-hidden no-scrollbar">
