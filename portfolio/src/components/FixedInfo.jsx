@@ -66,7 +66,7 @@ const FixedInfo = () => {
         <div className="rounded-xl overflow-hidden bg-orange-600">
           {/* Replace src with your portrait image path in /src/assets */}
           <img
-            src="/src/assets/image-removebg-preview.png"
+            src="/image-removebg-preview.png"
             alt="Sajal Shrivastav"
             className="w-full h-72 object-scale-down rounded-lg"
           />
