@@ -58,7 +58,7 @@ const Navbar = () => {
                     )
                   }
                 }}
-                className="cursor-pointer text-white font-medium hover:text-white/80 transition-colors duration-300 px-3 py-3 rounded-full hover:bg-white/10"
+                className="cursor-pointer text-white font-medium hover:text-orange-400 transition-colors duration-300 px-3 py-3 rounded-full hover:bg-white/10"
               >
                 {name}
               </motion.div>
