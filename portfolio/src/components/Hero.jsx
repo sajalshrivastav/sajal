@@ -50,9 +50,9 @@ const Hero = () => {
     <div className="min-h-screen no-scrollbar">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 relative">
-          {/* Fixed left panel */}
+          {/* Fixed left panel - Properly centered in mobile */}
           <div className="w-full lg:w-[360px] lg:fixed lg:left-auto">
-            <div className="lg:sticky lg:top-8">
+            <div className="lg:sticky lg:top-8 flex justify-center lg:justify-start">
               <FixedInfo />
             </div>
           </div>

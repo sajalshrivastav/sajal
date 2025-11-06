@@ -3,19 +3,42 @@ import { motion } from 'framer-motion'
 
 const Skills = () => {
   const skillCategories = {
-    Frontend: [
-      'React',
-      'Angular',
-      'Angular Material',
-      'TailwindCSS',
-      'TypeScript',
-      'JavaScript',
-      'HTML/CSS',
-      'SCSS',
-      'WebSocket',
+"frontend": [
+      "Angular",
+      "Angular Material",
+      "React.js",
+      "Redux Toolkit",
+      "RxJS",
+      "PrimeNG",
+      "Tailwind",
+      "HTML5",
+      "CSS3",
+      "SCSS"
     ],
-    Backend: ['Node.js', 'Express', 'MongoDB', 'REST API'],
-    Tools: ['Git', 'VS Code', 'Figma'],
+    "backend": [
+      "Node.js",
+      "Express.js",
+      "MongoDB (Mongoose)",
+      "REST APIs"
+    ],
+    "languages": [
+      "TypeScript",
+      "JavaScript (ES6+)"
+    ],
+    "tools": [
+      "Git",
+      "GitHub",
+      "Postman",
+      "Jira",
+      "Chrome DevTools"
+    ],
+    "concepts": [
+      "Component-driven architecture",
+      "Performance Optimization",
+      "State Management",
+      "WebSockets",
+      "Authentication & Authorization"
+    ]
   }
 
   const container = {
